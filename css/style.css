@@ -184,7 +184,7 @@ hr {
   height: 0px;
   margin: 0 auto;
   border: 0;
-  border-bottom: 2px dashed #015A6C; }
+  border-bottom: 2px dashed #0047AB; }
 
 em {
   font-size: 0.9em; }
@@ -411,7 +411,7 @@ body {
   background-attachment: fixed;
   background-color: #e6e6e6;
   scroll-behavior: smooth;
-  border-top: 3px solid #015A6C; }
+  border-top: 3px solid #0047AB; }
   body.hide-top {
     border-top: 3px solid transparent; }
 
@@ -421,11 +421,11 @@ body {
     background-image: none; } }
 
 ::selection {
-  background: #015A6C;
+  background: #0047AB;
   color: #fff; }
 
 .theme-color {
-  color: #015A6C; }
+  color: #0047AB; }
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -524,7 +524,7 @@ h6 {
       margin-left: 10px;
       font-size: 50px;
       font-family: Chancery;
-      color: #015A6C; }
+      color: #0047AB; }
     .header .logo-wrapper .subtitle {
       position: absolute;
       bottom: 10px;
@@ -566,7 +566,7 @@ h6 {
           bottom: 0;
           left: 51%;
           right: 51%;
-          background: #015A6C;
+          background: #0047AB;
           transition-duration: 0.2s;
           transition-property: right, left;
           transition-timing-function: ease-out; }
@@ -586,7 +586,7 @@ h6 {
     left: 0;
     width: 100%;
     background-color: #e6e6e6;
-    border-bottom: 3px solid #015A6C;
+    border-bottom: 3px solid #0047AB;
     padding: 5px 10px;
     z-index: 10;
     box-shadow: 0px 2px 5px rgba(138, 138, 138, 0.5);
@@ -607,7 +607,7 @@ h6 {
       .header .topbar .logo .title {
         font-family: Chancery;
         font-size: 19px;
-        color: #015A6C; }
+        color: #0047AB; }
     .header .topbar .menu {
       float: right;
       margin-right: 40px; }
@@ -629,7 +629,7 @@ h6 {
           bottom: 0;
           left: 51%;
           right: 51%;
-          background: #015A6C;
+          background: #0047AB;
           transition-duration: 0.2s;
           transition-property: right, left;
           transition-timing-function: ease-out; }
@@ -701,7 +701,7 @@ h6 {
       bottom: 0;
       left: 51%;
       right: 51%;
-      background: #015A6C;
+      background: #0047AB;
       transition-duration: 0.2s;
       transition-property: right, left;
       transition-timing-function: ease-out; }
@@ -717,7 +717,7 @@ h6 {
         margin-right: 3px;
         color: #8a8a8a !important; }
       .post-header .post-meta .post-category a:hover {
-        color: #015A6C; }
+        color: #0047AB; }
     .post-header .post-meta .post-read::after {
       content: 'min'; }
   .post-header .post-meta .post-time, .post-header .post-meta .post-category, .post-header .post-meta .post-visits, .post-header .post-meta .post-count, .post-header .post-meta .post-read {
@@ -733,7 +733,7 @@ h6 {
     .post-header .tags a {
       color: inherit; }
       .post-header .tags a:hover {
-        color: #015A6C; }
+        color: #0047AB; }
 
 .post-toc {
   position: absolute;
@@ -741,13 +741,13 @@ h6 {
   margin-left: 800px;
   padding: 10px;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-  border-left: 2px solid #015A6C;
+  border-left: 2px solid #0047AB;
   word-wrap: break-word;
   box-sizing: border-box; }
   .post-toc .post-toc-title {
     margin: 0 10px;
     font-size: 30px;
-    color: #015A6C;
+    color: #0047AB;
     font-weight: 400;
     text-transform: uppercase; }
   .post-toc .post-toc-content {
@@ -779,7 +779,7 @@ h6 {
           bottom: 0;
           left: 51%;
           right: 51%;
-          background: #015A6C;
+          background: #0047AB;
           transition-duration: 0.2s;
           transition-property: right, left;
           transition-timing-function: ease-out; }
@@ -787,7 +787,7 @@ h6 {
           right: 0;
           left: 0; }
     .post-toc .post-toc-content .toc-link.active {
-      color: #015A6C;
+      color: #0047AB;
       font-weight: 600; }
 
 @media screen and (max-width: 1400px) {
@@ -842,13 +842,13 @@ h6 {
 .post-content .headerlink::before {
   content: "";
   margin-right: 5px;
-  border-left: 2px solid #015A6C; }
+  border-left: 2px solid #0047AB; }
 
 .post-content a {
-  color: #015A6C;
+  color: #0047AB;
   word-break: break-all; }
   .post-content a:hover {
-    border-bottom: 1px solid #015A6C; }
+    border-bottom: 1px solid #0047AB; }
   .post-content a.fancybox {
     border: 0;
     text-align: center; }
@@ -1152,7 +1152,7 @@ h6 {
   .post-copyright .copyright-item {
     margin: 5px 0; }
     .post-copyright .copyright-item a {
-      color: #015A6C; }
+      color: #0047AB; }
 
 .post-reward {
   margin-top: 20px;
@@ -1198,7 +1198,7 @@ h6 {
     padding: 15px 0; }
     .post-footer .post-tags a {
       margin-right: 5px;
-      color: #015A6C;
+      color: #0047AB;
       word-break: break-all; }
   .post-footer .post-nav {
     margin: 1em 0; }
@@ -1218,12 +1218,12 @@ h6 {
     .post-footer .post-nav .prev {
       float: left; }
       .post-footer .post-nav .prev:hover {
-        color: #015A6C;
+        color: #0047AB;
         transform: translateX(-4px); }
     .post-footer .post-nav .next {
       float: right; }
       .post-footer .post-nav .next:hover {
-        color: #015A6C;
+        color: #0047AB;
         transform: translateX(4px); }
     .post-footer .post-nav .nav-mobile {
       display: none; }
@@ -1292,12 +1292,12 @@ h6 {
   .pagination .prev {
     float: left; }
     .pagination .prev:hover {
-      color: #015A6C;
+      color: #0047AB;
       transform: translateX(-4px); }
   .pagination .next {
     float: right; }
     .pagination .next:hover {
-      color: #015A6C;
+      color: #0047AB;
       transform: translateX(4px); }
 
 .footer {
@@ -1306,7 +1306,7 @@ h6 {
     text-align: center; }
     .footer .social-links .iconfont {
       font-size: 26px;
-      color: #015A6C; }
+      color: #0047AB; }
       .footer .social-links .iconfont + .iconfont {
         margin-left: 10px; }
       .footer .social-links .iconfont:hover {
@@ -1318,7 +1318,7 @@ h6 {
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif; }
     .footer .copyright .hexo-link,
     .footer .copyright .theme-link {
-      color: #015A6C; }
+      color: #0047AB; }
     .footer .copyright .copyright-year {
       display: block; }
       .footer .copyright .copyright-year .heart {
@@ -1354,11 +1354,11 @@ h6 {
       margin-right: 10px;
       color: #8a8a8a; }
     .archive .archive-post .archive-post-title .archive-post-link {
-      color: #015A6C; }
+      color: #0047AB; }
     .archive .archive-post::first-child {
       margin-top: 10px; }
     .archive .archive-post:hover {
-      border-left: 3px solid #015A6C;
+      border-left: 3px solid #0047AB;
       transition: 0.2s ease-out;
       transform: translateX(4px); }
       .archive .archive-post:hover .archive-post-time {
@@ -1388,8 +1388,8 @@ h6 {
   .tag-cloud .tag-cloud-title {
     display: inline-block;
     font-size: 18px;
-    color: #015A6C;
-    border-bottom: 2px solid #015A6C; }
+    color: #0047AB;
+    border-bottom: 2px solid #0047AB; }
   .tag-cloud .tag-cloud-tags {
     margin: 10px 0; }
     .tag-cloud .tag-cloud-tags a {
@@ -1401,7 +1401,7 @@ h6 {
       transition-property: transform;
       transition-timing-function: ease-out; }
       .tag-cloud .tag-cloud-tags a:active, .tag-cloud .tag-cloud-tags a:focus, .tag-cloud .tag-cloud-tags a:hover {
-        color: #015A6C;
+        color: #0047AB;
         transform: scale(1.1); }
 
 .categories {
@@ -1411,8 +1411,8 @@ h6 {
   .categories .categories-title {
     display: inline-block;
     font-size: 18px;
-    color: #015A6C;
-    border-bottom: 2px solid #015A6C; }
+    color: #0047AB;
+    border-bottom: 2px solid #0047AB; }
   .categories .categories-tags {
     margin: 10px 0; }
     .categories .categories-tags .category-link {
@@ -1428,10 +1428,10 @@ h6 {
         position: relative;
         top: -8px;
         right: -2px;
-        color: #015A6C;
+        color: #0047AB;
         font-size: 12px; }
       .categories .categories-tags .category-link:active, .categories .categories-tags .category-link:focus, .categories .categories-tags .category-link:hover {
-        color: #015A6C;
+        color: #0047AB;
         transform: scale(1.1); }
 
 .slideout-menu {
@@ -1467,7 +1467,7 @@ h6 {
   font-size: 2em; }
   .visit-total .icon {
     font-size: 1.5em;
-    color: #015A6C; }
+    color: #0047AB; }
 
 .mobile-navbar {
   display: none;
@@ -1495,9 +1495,9 @@ h6 {
       font-size: 22px;
       line-height: 50px;
       font-family: Chancery;
-      color: #015A6C; }
+      color: #0047AB; }
   .mobile-navbar .mobile-navbar-icon {
-    color: #015A6C;
+    color: #0047AB;
     height: 50px;
     width: 50px;
     font-size: 24px;
@@ -1547,7 +1547,7 @@ h6 {
       top: calc((100% - 1px) / 2);
       width: 20px;
       height: 1px;
-      background-color: #015A6C; }
+      background-color: #0047AB; }
       .mobile-navbar .mobile-navbar-icon span:nth-child(1) {
         transform: translateY(6px) rotate(0deg); }
       .mobile-navbar .mobile-navbar-icon span:nth-child(3) {
@@ -1582,7 +1582,7 @@ h6 {
     float: right;
     position: relative; }
   .mobile-navbar .mobile-post-toc-icon {
-    color: #015A6C;
+    color: #0047AB;
     height: 50px;
     width: 50px;
     line-height: 50px;
@@ -1607,7 +1607,7 @@ h6 {
       font-size: 18px;
       font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif; }
       .mobile-menu .mobile-menu-list a:hover {
-        color: #015A6C; }
+        color: #0047AB; }
   .mobile-menu .mobile-menu-social {
     margin-top: 35px; }
     .mobile-menu .mobile-menu-social .social-links {
@@ -1615,7 +1615,7 @@ h6 {
       .mobile-menu .mobile-menu-social .social-links a {
         font-size: 18px;
         font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-        color: #015A6C; }
+        color: #0047AB; }
 
 .mobile-toc {
   position: absolute;
@@ -1623,12 +1623,12 @@ h6 {
   right: 0px; }
   .mobile-toc .post-toc {
     position: fixed;
-    border-left: 2px solid #015A6C;
+    border-left: 2px solid #0047AB;
     margin: 55px 5px; }
     .mobile-toc .post-toc .post-toc-title {
       margin: 0px 10px 10px 10px;
       font-size: 1em;
-      color: #015A6C;
+      color: #0047AB;
       font-weight: 400;
       text-transform: uppercase; }
     .mobile-toc .post-toc .post-toc-content {
@@ -1649,7 +1649,7 @@ h6 {
         text-overflow: ellipsis;
         white-space: nowrap; }
       .mobile-toc .post-toc .post-toc-content .toc-link.active {
-        color: #015A6C;
+        color: #0047AB;
         font-weight: 600; }
 
 .mobile-magin-top {
@@ -1674,7 +1674,7 @@ h6 {
   z-index: 10;
   width: 30px;
   height: 30px;
-  border: 2px solid #015A6C;
+  border: 2px solid #0047AB;
   border-radius: 30px;
   text-align: center;
   line-height: 30px;
@@ -1687,18 +1687,18 @@ h6 {
     display: none !important; } }
 
 #nprogress .bar {
-  background: #015A6C;
+  background: #0047AB;
   height: 3px; }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px #015A6C, 0 0 5px #015A6C; }
+  box-shadow: 0 0 10px #0047AB, 0 0 5px #0047AB; }
 
 #nprogress .spinner-icon {
-  border-top-color: #015A6C;
-  border-left-color: #015A6C; }
+  border-top-color: #0047AB;
+  border-left-color: #0047AB; }
 
 .author-box {
-  color: #015A6C;
+  color: #0047AB;
   text-align: center;
   padding: 25px 0 25px 0; }
   .author-box .image {
@@ -1743,7 +1743,7 @@ h6 {
     color: #8a8a8a;
     font-size: 28px; }
     .author .visit-total .icon {
-      color: #015A6C;
+      color: #0047AB;
       font-size: 28px; }
   .author .author-categories {
     margin-bottom: 25px;
@@ -1755,7 +1755,7 @@ h6 {
     text-align: center; }
     .author .author-social .social-links a {
       font-size: 26px;
-      color: #015A6C; }
+      color: #0047AB; }
       .author .author-social .social-links a + a {
         margin-left: 10px; }
       .author .author-social .social-links a:hover {
@@ -1774,11 +1774,11 @@ h6 {
   position: relative;
   top: -8px;
   right: -2px;
-  color: #015A6C;
+  color: #0047AB;
   font-size: 12px; }
 
 .author .author-categories .category-link:active, .author .author-categories .category-link:focus, .author .author-categories .category-link:hover, .author .author-tags .tag-link:active, .author .author-tags .tag-link:focus, .author .author-tags .tag-link:hover {
-  color: #015A6C;
+  color: #0047AB;
   transform: scale(1.1); }
 
 @media screen and (max-width: 1400px) {
@@ -1801,11 +1801,11 @@ h6 {
       transform: translateY(-5px); }
   .bd-share-box .iconfont {
     font-size: 24px;
-    color: #015A6C;
+    color: #0047AB;
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: 2px solid #015A6C;
+    border: 2px solid #0047AB;
     border-radius: 30px;
     text-align: center;
     line-height: 30px;
@@ -1880,11 +1880,11 @@ h6 {
   .dark a {
     color: #b5afaf; }
   .dark .theme-color {
-    color: #015A6C; }
+    color: #0047AB; }
   .dark .slideout-panel {
     background-color: #2a2c2e; }
   .dark .growl .growl-message a {
-    color: #015A6C !important; }
+    color: #0047AB !important; }
   .dark .header {
     border-bottom: 1px dashed #202124; }
     .dark .header .logo-wrapper .icon {
@@ -1949,18 +1949,18 @@ h6 {
       color: #b5afaf; }
   .dark .posts .post-toc,
   .dark .post .post-toc {
-    border-left: 2px solid #015A6C; }
+    border-left: 2px solid #0047AB; }
     .dark .posts .post-toc .post-toc-title,
     .dark .post .post-toc .post-toc-title {
-      color: #015A6C; }
+      color: #0047AB; }
   .dark .posts .bd-share-box .iconfont,
   .dark .post .bd-share-box .iconfont {
-    color: #015A6C;
-    border: 2px solid #015A6C;
+    color: #0047AB;
+    border: 2px solid #0047AB;
     box-shadow: 3px 3px 15px #060606; }
   .dark .back-to-top {
-    color: #015A6C;
-    border: 2px solid #015A6C;
+    color: #0047AB;
+    border: 2px solid #0047AB;
     box-shadow: 3px 3px 15px #060606; }
   .dark table th {
     background-color: #202124; }
