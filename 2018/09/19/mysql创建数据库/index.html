@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="IDEA如何自动生成serialVersionUID">
+  <meta name="description" content="Mysql创建数据库">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://yoursite.com/2019/03/22/IDEA如何自动生成serialVersionUID/">
+<link rel="canonical" href="http://yoursite.com/2018/09/19/mysql创建数据库/">
 
 
 
@@ -90,7 +90,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> IDEA如何自动生成serialVersionUID - Marvin_wjs </title>
+    <title> Mysql创建数据库 - Marvin_wjs </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -224,18 +224,18 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          IDEA如何自动生成serialVersionUID
+          Mysql创建数据库
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-03-22
+          2018-09-19
         </span>
         
           <span class="post-category">
             
-              <a href="/categories/序列化/">序列化</a>
+              <a href="/categories/mysql/">mysql</a>
             
           </span>
         
@@ -249,9 +249,12 @@
 
     <div class="post-content">
       
-        <p>preferences/Editer/Inspections/Serialization issues</p>
-<p>勾选serialVersionUID alt+enter 提示生成serialVersionUID;<br><a id="more"></a></p>
-<p><img src="https://marvinwjs.github.io/images/tool/idea_uid.png" alt="idea"></p>
+        <p><strong>安装环境：</strong><br>linux<br>mysql5.7<br><a id="more"></a></p>
+<p>#####1.新建用户 root用户进入mysql<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="meta"># mysql -u root -p </span></span><br><span class="line">mysql&gt; CREATE USER 'marvin'@'%'  IDENTIFIED BY 'marvin123'; </span><br><span class="line">Query OK, <span class="number">0</span> <span class="function">rows <span class="title">affected</span> <span class="params">(<span class="number">0.00</span> sec)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>#####2.为用户授权<br>1.新建数据库<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database mall;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="function">row <span class="title">affected</span> <span class="params">(<span class="number">0.04</span> sec)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mall               |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line"><span class="number">5</span> <span class="function">rows in <span class="title">set</span> <span class="params">(<span class="number">0.00</span> sec)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>2.授权用户拥有mall数据库的所有权限：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant all privileges on mall.* to 'marvin'@'%' identified by 'marvin123';</span><br><span class="line">Query OK, <span class="number">0</span> rows affected, <span class="number">1</span> warning (<span class="number">0.46</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;<span class="comment">//刷新系统权限</span></span><br><span class="line">Query OK, <span class="number">0</span> <span class="function">rows <span class="title">affected</span> <span class="params">(<span class="number">0.00</span> sec)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>3.删除用户<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop user 用户名@’%’; </span><br><span class="line">drop user 用户名@ localhost;</span><br></pre></td></tr></table></figure></p>
+<p>4.修改用户密码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p </span><br><span class="line">use mysql;</span><br><span class="line">update user set authentication_string=password(“新密码”) where User='用户名' and Host='localhost'; </span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -267,7 +270,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="http://yoursite.com/2019/03/22/IDEA如何自动生成serialVersionUID/">http://yoursite.com/2019/03/22/IDEA如何自动生成serialVersionUID/</a>
+      <a href="http://yoursite.com/2018/09/19/mysql创建数据库/">http://yoursite.com/2018/09/19/mysql创建数据库/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span>
@@ -287,9 +290,11 @@
         
           <div class="post-tags">
             
-              <a href="/tags/IDEA/">IDEA</a>
+              <a href="/tags/Linux/">Linux</a>
             
-              <a href="/tags/serialVersionUID/">serialVersionUID</a>
+              <a href="/tags/mysql/">mysql</a>
+            
+              <a href="/tags/databases/">databases</a>
             
           </div>
         
@@ -297,9 +302,15 @@
         
   <nav class="post-nav">
     
+      <a class="prev" href="/2019/02/19/设计模式－工厂模式/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">设计模式－工厂模式</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
-      <a class="next" href="/2019/03/22/JVM－GC/">
-        <span class="next-text nav-default">JVM－GC</span>
+    
+      <a class="next" href="/2018/09/18/Linux安装mysql/">
+        <span class="next-text nav-default">Linux安装mysql</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="JVM－GC">
+
+
+
+
+  <meta name="keywords" content="90后">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Marvin_wjs">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/03/22/JVM－GC/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> JVM－GC - Marvin_wjs </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Marvin_wjs</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories/">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Marvin_wjs</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories/">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          JVM－GC
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-22
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/JVM/">JVM</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#GC垃圾回收"><span class="toc-text">GC垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是垃圾"><span class="toc-text">1.什么是垃圾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-垃圾回收算法"><span class="toc-text">2.垃圾回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-分代回收算法"><span class="toc-text">2.1 分代回收算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-年轻代回收（copying算法）"><span class="toc-text">2.1.1 年轻代回收（copying算法）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-老年代回收-标记复制算法"><span class="toc-text">2.1.2 老年代回收(标记复制算法)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-标记-清除算法-Mark-Sweep"><span class="toc-text">2.2 标记 -清除算法(Mark-Sweep)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-复制算法-copying"><span class="toc-text">2.3 复制算法(copying)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-标记-整理（Mark-Compact）"><span class="toc-text">2.4 标记-整理（Mark-Compact）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-垃圾收集器"><span class="toc-text">3.垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-ParNew收集器"><span class="toc-text">3.2 ParNew收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-Parallel收集器"><span class="toc-text">3.3 Parallel收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-Parallel-Old-收集器"><span class="toc-text">3.4 Parallel Old 收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-CMS收集器"><span class="toc-text">3.5 CMS收集器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-G1收集器"><span class="toc-text">3.6 G1收集器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-GC调优"><span class="toc-text">4.GC调优</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#stop-the-world"><span class="toc-text">stop-the-world</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h3 id="GC垃圾回收"><a href="#GC垃圾回收" class="headerlink" title="GC垃圾回收"></a>GC垃圾回收</h3><p>GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，而且Java语言没有提供释放已分配内存的显示操作方法。<br><a id="more"></a></p>
+<p>####垃圾回收的优点：</p>
+<blockquote>
+<ul>
+<li>开发人员不需要去管里内存，全部交给GC管理</li>
+<li>有效的避免了内存泄漏</li>
+</ul>
+</blockquote>
+<h3 id="1-什么是垃圾"><a href="#1-什么是垃圾" class="headerlink" title="1.什么是垃圾"></a>1.什么是垃圾</h3><p>判断对象是否是垃圾一般有两种方法：</p>
+<p>####可达性分析<br>从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。<br>在Java语言中，GC Roots包括：</p>
+<blockquote>
+<ul>
+<li>虚拟机栈中引用的对象。</li>
+<li>方法区中类静态属性实体引用的对象。</li>
+<li>方法区中常量引用的对象。</li>
+<li>本地方法栈中JNI引用的对象。</li>
+</ul>
+</blockquote>
+<p>####引用计数<br>在java中引用与对象是有关联的，要操作对象必须要使用引用，因此可以使用引用计数来判断一个对象是否可以回收，<strong>一个对象如果新增引用则计数加1，释放引用则减1，引用计数为0则可以回收。</strong>此方法简单，但是无法解决对象循环引用的问题。</p>
+<h3 id="2-垃圾回收算法"><a href="#2-垃圾回收算法" class="headerlink" title="2.垃圾回收算法"></a>2.垃圾回收算法</h3><h4 id="2-1-分代回收算法"><a href="#2-1-分代回收算法" class="headerlink" title="2.1 分代回收算法"></a>2.1 分代回收算法</h4><p><strong>GC分代的基本假设：绝大部分对象的生命周期都非常短暂，存活时间短。</strong><br>分代回收算法是目前大多数JVM采用的算法，其核心思想是把对象的不同生命周期分成不同区域进行回收，一般分为老年代和新生代。<br>新生代可能每次需要回收大量对象，老年代每次需要回收少量对象，所以可采用不同的回收算法。<br><strong>因为新生代中对象的存活率比较低，所以一般采用复制算法，老年代的存活率一般比较高，一般使用”标记-清理”或者”标记-整理”算法进行回收。</strong></p>
+<h5 id="2-1-1-年轻代回收（copying算法）"><a href="#2-1-1-年轻代回收（copying算法）" class="headerlink" title="2.1.1 年轻代回收（copying算法）"></a>2.1.1 年轻代回收（copying算法）</h5><p>Minor GC（新生代GC），一般将新生代分成一块比较大的Eden空间和两块比较小的Survivor空间（to space from space）一般默认是8:1:1；<br>新new出来的对象都是在Eden空间，当Eden空间满了触发Minor GC，</p>
+<blockquote>
+<p>第一次GC：把存活的对象复制到一块Survivor区，<br>第二次GC：把Eden区和一块Survivor幸存的对象复制到另一块Survivor区，清除Survivor和Eden区；<br>第三次GC：重复第二次；</p>
+</blockquote>
+<p>如果GC在执行的时候有些对象一直没有被回收，那么他移动次数就会无限的累计，每次从Surior（from）到Surior（to）的过程中就相当于又增加了一次移动，当他达到一定的次数的时候（默认是15），就会移动到老年代里了，所以不存在不会被回收的对象，但是这个次数可以设置的，</p>
+<blockquote>
+<p>-XX:MaxTenuringThreshold</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>其实上边的这只是一种情况，还有就是如果对象太大，存不下，那就直接会进入老年代。</li>
+<li>还有那种默认就是长期活着的也会进入老年代，</li>
+</ul>
+</blockquote>
+<h5 id="2-1-2-老年代回收-标记复制算法"><a href="#2-1-2-老年代回收-标记复制算法" class="headerlink" title="2.1.2 老年代回收(标记复制算法)"></a>2.1.2 老年代回收(标记复制算法)</h5><p>当老年代存储不足就会触发major gc或full gc；老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记-清理”或“标记-整理”算法来进行回收。</p>
+<h4 id="2-2-标记-清除算法-Mark-Sweep"><a href="#2-2-标记-清除算法-Mark-Sweep" class="headerlink" title="2.2 标记 -清除算法(Mark-Sweep)"></a>2.2 标记 -清除算法(Mark-Sweep)</h4><p>标记 -清除算法(Mark-Sweep)可分为两个阶段：</p>
+<blockquote>
+<p>1.标记（Mark）过程：找到所有的可以访问的对象，做个指定的标记。<br>2.清除（Swep）过程：遍历堆内存，把未标记的对象进行一个回收。</p>
+</blockquote>
+<p>它主要有两个缺点：<strong>1.空间问题：清理出的空间不连续，导致空间碎片；2.标记和清除的效率都不是很高；</strong></p>
+<h4 id="2-3-复制算法-copying"><a href="#2-3-复制算法-copying" class="headerlink" title="2.3 复制算法(copying)"></a>2.3 复制算法(copying)</h4><p>复制算法(copying)是把内存空间按容量分成相同的两份，<strong>每次使用其中的一份，标记过后把存活的对象复制到另一块内存，然后清除已使用过的内存。</strong><br>这样是的清理出的空间是连续的，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价是将内存缩小为原来的一半，持续复制长生存期的对象则导致效率降低。<br>该算法再存活对象较多的情况下，需要执行较多的复制操作，影响整体效率，故老年代一般不采用该算法。</p>
+<h4 id="2-4-标记-整理（Mark-Compact）"><a href="#2-4-标记-整理（Mark-Compact）" class="headerlink" title="2.4 标记-整理（Mark-Compact）"></a>2.4 标记-整理（Mark-Compact）</h4><p>标记-整理（Mark-Compact)算法是在Mark-Sweep算法的基础进行整理，前面标记过程仍然一致，后续步骤不是直接把对象回收，而是把存活对象都往内存的一端进行移动，再把端以外的内存回收。</p>
+<h3 id="3-垃圾收集器"><a href="#3-垃圾收集器" class="headerlink" title="3.垃圾收集器"></a>3.垃圾收集器</h3><p>####3.1 串行收集器（Serial）<br>串行收集器是最古老，最稳定以及效率高的收集器，可能会产生较长的停顿，只使用一个线程去回收。新生代、老年代使用串行回收；新生代复制算法、老年代标记-整理；垃圾收集的过程中会Stop The World（服务暂停）</p>
+<blockquote>
+<p>参数控制：-XX:+UseSerialGC 串行收集器</p>
+</blockquote>
+<h4 id="3-2-ParNew收集器"><a href="#3-2-ParNew收集器" class="headerlink" title="3.2 ParNew收集器"></a>3.2 ParNew收集器</h4><p>其实就是Serial收集器的多线程版本。新生代并行，老年代串行；新生代复制算法、老年代标记-压缩</p>
+<p>参数控制：</p>
+<blockquote>
+<p>-XX:+UseParNewGC ParNew收集器<br>-XX:ParallelGCThreads 限制线程数量</p>
+</blockquote>
+<h4 id="3-3-Parallel收集器"><a href="#3-3-Parallel收集器" class="headerlink" title="3.3 Parallel收集器"></a>3.3 Parallel收集器</h4><p>Parallel Scavenge收集器类似ParNew收集器，Parallel收集器更关注系统的吞吐量。可以通过参数来打开自适应调节策略，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或最大的吞吐量；也可以通过参数控制GC的时间不大于多少毫秒或者比例；新生代复制算法、老年代标记-压缩</p>
+<p>参数控制：</p>
+<blockquote>
+<p>-XX:+UseParallelGC 使用Parallel收集器+ 老年代串行</p>
+</blockquote>
+<h4 id="3-4-Parallel-Old-收集器"><a href="#3-4-Parallel-Old-收集器" class="headerlink" title="3.4 Parallel Old 收集器"></a>3.4 Parallel Old 收集器</h4><p>Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记－整理”算法。这个收集器是在JDK 1.6中才开始提供</p>
+<p>参数控制：</p>
+<blockquote>
+<p>-XX:+UseParallelOldGC 使用Parallel收集器+ 老年代并行</p>
+</blockquote>
+<h4 id="3-5-CMS收集器"><a href="#3-5-CMS收集器" class="headerlink" title="3.5 CMS收集器"></a>3.5 CMS收集器</h4><p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用都集中在互联网站或B/S系统的服务端上，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。</p>
+<p>从名字（包含“Mark Sweep”）上就可以看出CMS收集器是基于“标记-清除”算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为4个步骤，包括：</p>
+<blockquote>
+<ul>
+<li>初始标记（CMS initial mark）</li>
+<li>并发标记（CMS concurrent mark）</li>
+<li>重新标记（CMS remark）</li>
+<li>并发清除（CMS concurrent sweep）</li>
+</ul>
+</blockquote>
+<p>其中初始标记、重新标记这两个步骤仍然需要“Stop The World”。初始标记仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots Tracing的过程，而重新标记阶段则是为了修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记的时间短。</p>
+<p>由于整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，所以总体上来说，CMS收集器的内存回收过程是与用户线程一起并发地执行。老年代收集器（新生代使用ParNew）</p>
+<p><strong>优点: 并发收集、低停顿<br>缺点: 产生大量空间碎片、并发阶段会降低吞吐量</strong></p>
+<p>参数控制：</p>
+<blockquote>
+<p>-XX:+UseConcMarkSweepGC 使用CMS收集器<br>-XX:+ UseCMSCompactAtFullCollection Full GC后，进行一次碎片整理；整理过程是独占的，会引起停顿时间变长<br>-XX:+CMSFullGCsBeforeCompaction 设置进行几次Full GC后，进行一次碎片整理<br>-XX:ParallelCMSThreads 设定CMS的线程数量（一般情况约等于可用CPU数量）</p>
+</blockquote>
+<h4 id="3-6-G1收集器"><a href="#3-6-G1收集器" class="headerlink" title="3.6 G1收集器"></a>3.6 G1收集器</h4><p>G1是目前技术发展的最前沿成果之一，HotSpot开发团队赋予它的使命是未来可以替换掉JDK1.5中发布的CMS收集器。与CMS收集器相比G1收集器有以下特点：</p>
+<p>空间整合，G1收集器采用标记整理算法，不会产生内存空间碎片。分配大对象时不会因为无法找到连续空间而提前触发下一次GC。<br>可预测停顿，这是G1的另一大优势，降低停顿时间是G1和CMS的共同关注点，但G1除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为N毫秒的时间片段内，消耗在垃圾收集上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。<br>上面提到的垃圾收集器，收集的范围都是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔阂了，它们都是一部分（可以不连续）Region的集合。<br>G1的新生代收集跟ParNew类似，当新生代占用达到一定比例的时候，开始出发收集。和CMS类似，G1收集器收集老年代对象会有短暂停顿。</p>
+<p>收集步骤：</p>
+<blockquote>
+<p>1、标记阶段，首先初始标记(Initial-Mark),这个阶段是停顿的(Stop the World Event)，并且会触发一次普通Mintor GC。对应GC log:GC pause (young) (inital-mark)<br>2、Root Region Scanning，程序运行过程中会回收survivor区(存活到老年代)，这一过程必须在young GC之前完成。<br>3、Concurrent Marking，在整个堆中进行并发标记(和应用程序并发执行)，此过程可能被young GC中断。在并发标记阶段，若发现区域对象中的所有对象都是垃圾，那个这个区域会被立即回收(图中打X)。同时，并发标记过程中，会计算每个区域的对象活性(区域中存活对象的比例)。<br>4、Remark, 再标记，会有短暂停顿(STW)。再标记阶段是用来收集 并发标记阶段 产生新的垃圾(并发阶段和应用程序一同运行)；G1中采用了比CMS更快的初始快照算法:snapshot-at-the-beginning (SATB)。<br>5、Copy/Clean up，多线程清除失活对象，会有STW。G1将回收区域的存活对象拷贝到新区域，清除Remember Sets，并发清空回收区域并把它返回到空闲区域链表中。<br>6、复制/清除过程后。回收区域的活性对象已经被集中回收到深蓝色和深绿色区域。</p>
+</blockquote>
+<h3 id="4-GC调优"><a href="#4-GC调优" class="headerlink" title="4.GC调优"></a>4.GC调优</h3><h4 id="stop-the-world"><a href="#stop-the-world" class="headerlink" title="stop-the-world"></a>stop-the-world</h4><p>Java中Stop-The-World机制简称STW，是在执行垃圾收集算法时，Java应用程序的其他所有线程都被挂起（除了垃圾收集帮助器之外）。Java中一种全局暂停现象，全局停顿，所有Java代码停止，native代码可以执行，但不能与JVM交互；这些现象多半是由于gc引起。</p>
+<p>如果说不停止程序的话，我们在标记完成这个b对象之后，我们new出一个新的对象J，可以从B指向J，也就是说，这时候J应该是被标记的状态，但是实际情况肯定不是，这个对象在B标记完之后，马上都要结束了，我们又new出来一个对象，可想而知，他肯定是没有被标记的，所以在第二阶段进行清除的时候，这个苦命的J将会被清除掉， 那这样肯定是不符合我们的实际情况的。</p>
+<p>####什么原因会导致频繁minor gc</p>
+<blockquote>
+<ul>
+<li>堆内存太小或者eden新生代分配太小</li>
+<li>产生很多临时对象，不要频繁GC</li>
+</ul>
+</blockquote>
+<p>minor gc运行很慢：</p>
+<blockquote>
+<ul>
+<li>新生代分配太大</li>
+<li>对象引用链过长</li>
+<li>采用的垃圾回收器效率低，如采用串行（seriel）回收器</li>
+<li>survier 分配太小，导致需要移植老年代 移动的开销</li>
+<li>触发发full GC，System.GC  创建大对象 老年代内存不足</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">marvin</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2019/03/22/JVM－GC/">http://yoursite.com/2019/03/22/JVM－GC/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/JVM/">JVM</a>
+            
+              <a href="/tags/GC/">GC</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/22/IDEA如何自动生成serialVersionUID/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">IDEA如何自动生成serialVersionUID</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/19/设计模式－工厂模式/">
+        <span class="next-text nav-default">设计模式－工厂模式</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ahonn" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">marvin</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Linux安装mysql">
+
+
+
+
+  <meta name="keywords" content="90后">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Marvin_wjs">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/09/18/Linux安装mysql/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Linux安装mysql - Marvin_wjs </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Marvin_wjs</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories/">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Marvin_wjs</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories/">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Linux安装mysql
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-09-18
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/mysql/">mysql</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        <p>#####安装环境：<br>Linux系统：centOS7<br>gcc编译器安装：yum -y install numactl<br><a id="more"></a></p>
+<p>1、下载安装包 </p>
+<blockquote>
+<p>wget <a href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz" target="_blank" rel="noopener">https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz</a></p>
+</blockquote>
+<p>我这里安装的mysql5.7版本，你可以选择安装版本下载；</p>
+<p>2、解压<br>解压</p>
+<blockquote>
+<p>tar -xvf mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz</p>
+</blockquote>
+<p>移动</p>
+<blockquote>
+<p>mv mysql-5.7.22-linux-glibc2.12-x86_64 /usr/local/</p>
+</blockquote>
+<p>重命名</p>
+<blockquote>
+<p>mv /usr/local/mysql-5.7.22-linux-glibc2.12-x86_64 /usr/local/mysql</p>
+</blockquote>
+<p>3.安装配置<br>新建/usr/local/mysql/data(存放数据库文件的目录)文件夹</p>
+<blockquote>
+<p>mkdir /usr/local/mysql/data</p>
+</blockquote>
+<p>新建mysql用户、mysql用户组</p>
+<blockquote>
+<p>useradd mysql -g mysql<br>groupadd mysql</p>
+</blockquote>
+<p>配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server mysql]# /usr/local/mysql/bin/mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data</span><br></pre></td></tr></table></figure></p>
+<p>如果出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2019-04-23 01:41:44 [WARNING] mysql_install_db is deprecated. Please consider switching to mysqld --initialize</span><br><span class="line">2019-04-23 01:41:54 [ERROR]   Child process: /usr/local/mysql/bin/mysqldterminated prematurely with errno= 32</span><br><span class="line">2019-04-23 01:41:54 [ERROR]   Failed to execute /usr/local/mysql/bin/mysqld --bootstrap --datadir=/usr/local/mysql/data --lc-messages-dir=/usr/local/mysql/share --lc-messages=en_US --basedir=/usr/local/mysql</span><br><span class="line">-- server log begin --</span><br><span class="line">/usr/local/mysql/bin/mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory</span><br><span class="line"></span><br><span class="line">-- server log end --</span><br></pre></td></tr></table></figure></p>
+<p>则使用以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mysql/bin/mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data</span><br></pre></td></tr></table></figure></p>
+<p>如果出现以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mysql/bin/mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p>
+<p>则使用以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server mysql]# yum -y install numactl</span><br></pre></td></tr></table></figure></p>
+<p>完成后继续安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mysql/bin/mysqld --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data --initialize</span><br></pre></td></tr></table></figure></p>
+<p>配置成功后会返回root密码</p>
+<blockquote>
+<p>2019-04-23T06:01:15.164017Z 1 [Note] A temporary password is generated for root@localhost: <strong>*</strong></p>
+</blockquote>
+<p>4.开启服务</p>
+<p>编辑/etc/my.cnf<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/usr/local/mysql/data</span><br><span class="line">basedir=/usr/local/mysql</span><br><span class="line">socket=/tmp/mysql.sock</span><br><span class="line">user=mysql</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"><span class="built_in">log</span>-error = /usr/local/mysql/data/error.<span class="built_in">log</span></span><br><span class="line">pid-file = /usr/local/mysql/data/mysql.pid</span><br><span class="line">character-<span class="built_in">set</span>-server=utf8</span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</span><br><span class="line">symbolic-links=<span class="number">0</span></span><br><span class="line"># Settings user <span class="keyword">and</span> group are ignored when systemd is used.</span><br><span class="line"># If you need to run mysqld under a different user <span class="keyword">or</span> group,</span><br><span class="line"># customize your systemd unit file <span class="keyword">for</span> mariadb according to the</span><br><span class="line"># instructions in http:<span class="comment">//fedoraproject.org/wiki/Systemd</span></span><br><span class="line"></span><br><span class="line">[mysqld_safe]</span><br><span class="line"><span class="built_in">log</span>-error = /usr/local/mysql/data/error.<span class="built_in">log</span></span><br><span class="line">pid-file=/usr/local/mysql/data/mysql.pid</span><br></pre></td></tr></table></figure></p>
+<p>将mysql加入服务<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server support-files]<span class="meta"># cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql</span></span><br></pre></td></tr></table></figure></p>
+<p>启动mysql<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="meta"># service mysql start</span></span><br><span class="line">Starting MySQL..Logging to '/usr/local/mysql/data/error.log'.</span><br><span class="line">................................. SUCCESS!</span><br></pre></td></tr></table></figure></p>
+<p>5.配置用户及数据库<br>进入数据库<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="meta"># mysql -u root -p</span></span><br><span class="line">-bash: mysql: command <span class="keyword">not</span> found</span><br></pre></td></tr></table></figure></p>
+<p>因为mysql命令的路径在/usr/local/mysql/bin下面,所以你直接使用mysql命令时,系统在/usr/bin下面查此命令,所以找不到了.解决方法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="meta"># vim ~/.bash_profile</span></span><br><span class="line">＃增加</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:/usr/local/mysql/bin</span><br><span class="line"></span><br><span class="line">[root@server ~]# source ~/.bash_profile <span class="comment">// 使其生效</span></span><br><span class="line"></span><br><span class="line">[root@server ~]# mysql -u root -p</span><br><span class="line">Enter password: <span class="comment">//输入之前保存的密码</span></span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; <span class="keyword">or</span> \g.</span><br><span class="line">Your MySQL connection id is <span class="number">2</span></span><br><span class="line">Server version: <span class="number">5.7</span><span class="number">.22</span></span><br><span class="line"></span><br><span class="line">Copyright (c) <span class="number">2000</span>, <span class="number">2018</span>, Oracle <span class="keyword">and</span>/<span class="keyword">or</span> its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation <span class="keyword">and</span>/<span class="keyword">or</span> its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure></p>
+<p>修改root初始密码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET PASSWORD = PASSWORD('root');</span><br><span class="line">Query OK, <span class="number">0</span> rows affected, <span class="number">1</span> warning (<span class="number">2.91</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; ALTER USER USER() IDENTIFIED BY 'root';</span><br><span class="line">Query OK, <span class="number">0</span> <span class="function">rows <span class="title">affected</span> <span class="params">(<span class="number">0.86</span> sec)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure></p>
+<p>6.配置防火墙外网连接数据库<br>1.如何修改Centos7的firewalld规则，开放mysql的3306端口<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="meta"># firewall-cmd --permanent --zone=public --add-port=3306/tcp</span></span><br><span class="line">#下面<span class="number">3</span>行是参数说明</span><br><span class="line">#–zone				        #作用域</span><br><span class="line">#–add-port=<span class="number">80</span>/tcp		#添加端口，格式为：端口/通讯协议</span><br><span class="line">#–permanent			        #永久生效，没有此参数重启后失效</span><br><span class="line">#重启防火墙后看看是否生效</span><br><span class="line">firewall-cmd --reload		#重启firewall</span><br><span class="line">firewall-cmd --<span class="built_in">list</span>-ports	#查看已经开放的端口</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">#如果想永久停止防火墙，执行下面操作</span><br><span class="line">systemctl stop firewalld.service         #停止firewall</span><br><span class="line">systemctl disable firewalld.service      #禁止firewall开机启动</span><br><span class="line"> </span><br><span class="line">#查看防火墙状态</span><br><span class="line">firewall-cmd --state		#查看默认防火墙状态（关闭后显示notrunning，开启后显示running）</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">marvin</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2018/09/18/Linux安装mysql/">http://yoursite.com/2018/09/18/Linux安装mysql/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+              <a href="/tags/mysql/">mysql</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/09/19/mysql创建数据库/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Mysql创建数据库</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/03/22/linux修改防火墙配置/">
+        <span class="next-text nav-default">linux修改防火墙</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ahonn" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">marvin</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
