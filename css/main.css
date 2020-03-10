@@ -280,7 +280,7 @@ a {
   color: #555;
   text-decoration: none;
   outline: none;
-  border-bottom: 1px solid #999;
+  /*border-bottom: 1px solid #999;*/
   word-wrap: break-word;
 }
 a:hover {
@@ -1608,7 +1608,7 @@ pre .javascript .function {
   left: auto;
 }
 .posts-expand .post-eof {
-  display: block;
+  display: none;
   margin-top: 5px;
   width: 8%;
   height: 1px;
