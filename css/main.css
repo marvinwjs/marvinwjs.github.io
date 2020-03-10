@@ -2672,7 +2672,7 @@ pre .javascript .function {
   }
 }
 .content-wrap {
-  float: left;
+  float: right;
   box-sizing: border-box;
   padding: 40px;
   width: 700px;
@@ -2698,7 +2698,7 @@ pre .javascript .function {
 }
 .sidebar {
   position: static;
-  float: right;
+  float: left;
   margin-top: 300px;
   width: 240px;
   background: #f5f7f9;
