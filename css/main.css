@@ -967,9 +967,11 @@ pre .javascript .function {
   -o-transform: scaleX(1);
   transform: scaleX(1);
 }
+.btn {
+  position: relative;
+}
 .btn +.btn {
   margin: 0 0 8px 8px;
-  position: relative;
 }
 .btn .fa-fw {
   width: 1.285714285714286em;
