@@ -864,6 +864,9 @@ pre .javascript .function {
   margin-bottom: 20px;
   padding-top: 10px;
 }
+.nav-number{
+  display: none;
+}
 .post-body .tabs ul.nav-tabs {
   margin: 0;
   padding: 0;
