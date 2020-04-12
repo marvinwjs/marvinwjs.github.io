@@ -353,11 +353,11 @@
 <li>String s2 = new String(“java”) </li>
 </ul>
 </blockquote>
-<p>第一种方式，从String pool寻找java，没有则在pool中创建，返回句柄；<br>第二种方式，会直接在堆（1.7后）创建String对象，只有调用了intern()方法，才会放入String pool；<br><img src="./string-heap.jpeg" alt="avatar"><br>JDK 1.7 之后把永生代换成的元空间，把字符串常量池从方法区移到了 Java 堆上。<br>除此之外编译器还会对String字符串做一些优化：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"ja"</span>+<span class="string">"va"</span>;</span><br><span class="line">String s2 = <span class="string">"java"</span>;</span><br><span class="line">System.out.pringln(s1 == s2);  <span class="comment">//结果为true</span></span><br></pre></td></tr></table></figure></p>
+<p>第一种方式，从String pool寻找java，没有则在pool中创建，返回句柄；<br>第二种方式，会直接在堆（1.7后）创建String对象，只有调用了intern()方法，才会放入String pool；<br><img src="/home/picture/1.png" alt="avatar"><br>JDK 1.7 之后把永生代换成的元空间，把字符串常量池从方法区移到了 Java 堆上。<br>除此之外编译器还会对String字符串做一些优化：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"ja"</span>+<span class="string">"va"</span>;</span><br><span class="line">String s2 = <span class="string">"java"</span>;</span><br><span class="line">System.out.pringln(s1 == s2);  <span class="comment">//结果为true</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="不可变"><a href="#不可变" class="headerlink" title="不可变"></a>不可变</h3><p>value数组被生命成了final，意味着value一旦初始化后便不可指向其它内存地址，并且String内部，没有改变value内容的任何方法。且String类为final类，避免了子类重写或修改String对象属性；<br><strong>保护性拷贝：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">char</span> value[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = Arrays.copyOf(value, value.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这是以char数组为参数的一个构造方法，它并没有把这个数组引用直接赋值给实例对象的value成员变量，而是通过一个Arrays.copyOf的方式拷贝一个数组再给到对象的成员变量，防止外部引用执行同一个地址而修改该数组内容。</p>
 <h4 id="不可变的好处"><a href="#不可变的好处" class="headerlink" title="不可变的好处"></a>不可变的好处</h4><h5 id="1-Requirement-of-String-Pool"><a href="#1-Requirement-of-String-Pool" class="headerlink" title="1.Requirement of String Pool"></a>1.Requirement of String Pool</h5><p>如果一个 String 对象已经被创建过了，那么就会从 String Pool 中取得引用。只有 String 是不可变的，才可能使用 String Pool。<br>以下代码将在堆中仅创建一个字符串对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">字符串 string1 =  “ abcd” ; </span><br><span class="line">字符串 string2 =  “ abcd” ;</span><br></pre></td></tr></table></figure></p>
-<p><img src="./java-string-pool.jpeg" alt="avatar"></p>
+<p><img src="/home/picture/1.png" alt="avatar"></p>
 <h5 id="2-Caching-Hashcode（缓存HashCode）"><a href="#2-Caching-Hashcode（缓存HashCode）" class="headerlink" title="2.Caching Hashcode（缓存HashCode）"></a>2.Caching Hashcode（缓存HashCode）</h5><p>字符串的哈希码在Java中经常使用。例如，在HashMap或HashSet中。不可变保证哈希码始终是相同的，这意味着无需每次使用哈希码就进行计算，这样更有效。</p>
 <h5 id="3-安全"><a href="#3-安全" class="headerlink" title="3.安全"></a>3.安全</h5><p>字符串被广泛用作许多java类的参数，例如网络连接，打开文件等。如果字符串不是不可变的，则连接或文件将被更改，这可能会导致严重的安全威胁，可变字符串也可能在反射中引起安全问题。</p>
 <h5 id="4-线程安全"><a href="#4-线程安全" class="headerlink" title="4.线程安全"></a>4.线程安全</h5><p>String 不可变性天生具备线程安全，可以在多个线程中安全地使用。</p>
@@ -420,8 +420,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/18/Linux安装mysql/" rel="prev" title="Linux安装mysql">
-                Linux安装mysql <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/20/泛型怎么玩/" rel="prev" title="泛型怎么玩">
+                泛型怎么玩 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -499,7 +499,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +521,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
