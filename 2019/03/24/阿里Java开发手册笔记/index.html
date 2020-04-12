@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近也算完完整整的看了一遍阿里的开发规范，确实有很多平时开发没有注意的点，主要对其中容易忽略的进行整理。">
+<meta name="keywords" content="java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里Java开发手册笔记">
+<meta property="og:url" content="https://marvinwjs.github.io/2019/03/24/阿里Java开发手册笔记/index.html">
+<meta property="og:site_name" content="Marvin">
+<meta property="og:description" content="最近也算完完整整的看了一遍阿里的开发规范，确实有很多平时开发没有注意的点，主要对其中容易忽略的进行整理。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-04-12T13:49:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里Java开发手册笔记">
+<meta name="twitter:description" content="最近也算完完整整的看了一遍阿里的开发规范，确实有很多平时开发没有注意的点，主要对其中容易忽略的进行整理。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":2},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://marvinwjs.github.io/2019/03/24/阿里Java开发手册笔记/">
+
+
+
+
+
+  <title>阿里Java开发手册笔记 | Marvin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Marvin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://marvinwjs.github.io/2019/03/24/阿里Java开发手册笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="marvin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Marvin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">阿里Java开发手册笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T20:00:01+08:00">
+                2019-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近也算完完整整的看了一遍阿里的开发规范，确实有很多平时开发没有注意的点，主要对其中容易忽略的进行整理。<br><a id="more"></a></p>
+<p><a href="https://https://marvinwjs.github.io/2019/03/24/Java-huashanxinban.pdf" target="_blank" rel="noopener">附上原阿里Java开发手册</a></p>
+<p>###第一节 编程规约</p>
+<h4 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h4><blockquote>
+<p>1.【强制】不允许任何魔法值（即未经预先定义的常量）直接出现在代码中。<br><code>反例</code>：String key = “Id#taobao_” + tradeId;         cache.put(key, value);       // 缓存 get 时，由于在代码复制时，漏掉下划线，导致缓存击穿而出现问题</p>
+</blockquote>
+<p>很多时候会图省事</p>
+<blockquote>
+<ol start="10">
+<li>【强制】IDE的text file encoding 设置为UTF-8; IDE中文件的换行符使用Unix格式，不 要使用Windows格式。 </li>
+</ol>
+</blockquote>
+<h4 id="OOP规约"><a href="#OOP规约" class="headerlink" title="OOP规约"></a>OOP规约</h4><blockquote>
+<p>7.【强制】所有整型包装类对象之间值的比较，全部使用equals方法比较。<br><code>说明</code>：对于Integer var = ? 在-128至127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产 生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数 据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用 equals方法进行判断。   </p>
+</blockquote>
+<blockquote>
+<p>10.【强制】为了防止精度损失，禁止使用构造方法 BigDecimal(double)的方式把double值转 化为 BigDecimal对象。<br><code>说明</code>：BigDecimal(double)存在精度损失风险，在精确计算或值比较的场景中可能会导致业务逻辑异常。<br>如：BigDecimal g = new BigDecimal(0.1f); 实际的存储值为：0.10000000149<br><code>正例</code>：优先推荐入参为 String 的构造方法，或使用 BigDecimal的valueOf 方法，此方法内部其实执行了 Double的toString，而 Double 的toString 按double 的实际能表达的精度对尾数进行了截断。 </p>
+</blockquote>
+<blockquote>
+<p>17.【推荐】使用索引访问用String的split方法得到的数组时，需做最后一个分隔符后有无内 容的检查，否则会有抛IndexOutOfBoundsException 的风险。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"a,b,c,,"</span>;  </span><br><span class="line">String[] ary = str.split(<span class="string">","</span>); </span><br><span class="line"><span class="comment">// 预期大于3，结果是3 </span></span><br><span class="line">System.out.println(ary.length);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>str.split(“,”)会做尾部连续空字符串检查</p>
+<h4 id="集合处理"><a href="#集合处理" class="headerlink" title="集合处理"></a>集合处理</h4><blockquote>
+<p>2.【强制】ArrayList的subList结果不可强转成ArrayList，否则会抛出 ClassCastException异 常，即 java.util.RandomAccessSubList cannot be cast to java.util.ArrayList。<br><code>说明</code>：subList 返回的是ArrayList 的内部类 SubList，并不是 ArrayList 而是ArrayList 的一个视图，对 于 SubList 子列表的所有操作最终会反映到原列表上。 </p>
+</blockquote>
+<blockquote>
+<p>3.【强制】使用Map 的方法 keySet()/values()/entrySet()返回集合对象时，不可以对其进行添 加元素操作，否则会抛出UnsupportedOperationException 异常。 </p>
+</blockquote>
+<p>返回的都是内部集合，未实现对应的add方法；</p>
+<blockquote>
+<p>5.【强制】在subList场景中，高度注意对原集合元素的增加或删除，均会导致子列表的遍 历、增加、删除产生ConcurrentModificationException 异常。 </p>
+</blockquote>
+<p>返回的是List的部分元素视图，操作的还是原List</p>
+<blockquote>
+<p>6.【强制】使用集合转数组的方法，必须使用集合的toArray(T[] array)，传入的是类型完全一 致、长度为0的空数组。 </p>
+</blockquote>
+<p><i class="icon-heart"></i> 看源码，会创建集合大小的数组，默认返回 Object[]类；</p>
+<blockquote>
+<p>7.【强制】在使用Collection 接口任何实现类的addAll()方法时，都要对输入的集合参数进行 NPE判断。<br><code>说明</code>：在ArrayList#addAll 方法的第一行代码即 Object[] a = c.toArray(); 其中 c为输入集合参数，如果 为 null，则直接抛出异常。 </p>
+</blockquote>
+<blockquote>
+<p>8.【强制】使用工具类Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方 法，它的add/remove/clear方法会抛出UnsupportedOperationException 异常。<br><code>说明</code>：asList 的返回对象是一个 Arrays内部类，并没有实现集合的修改方法。Arrays.asList 体现的是适 配器模式，只是转换接口，后台的数据仍是数组</p>
+</blockquote>
+<blockquote>
+<p>9.【强制】泛型通配符&lt;? extends T&gt;来接收返回的数据，此写法的泛型集合不能使用 add方 法，而&lt;? super T&gt;不能使用 get方法，作为接口调用赋值时易出错。<br><code>说明</code>：扩展说一下 <strong>PECS(Producer Extends Consumer Super)原则</strong>：</p>
+<blockquote>
+<p>第一、频繁往外读取内容的，适合 用&lt;? extends T&gt;。<br>第二、经常往里插入的，适合用&lt;? super T&gt; </p>
+</blockquote>
+</blockquote>
+<p>&lt;? extends T&gt;确定了上限，规定了取出数据的父类，&lt;? super T&gt; 规定了存入数据的父类；</p>
+<blockquote>
+<p>11.【强制】不要在foreach循环里进行元素的remove/add操作。remove元素请使用 Iterator方式，如果并发操作，需要对Iterator对象加锁。</p>
+</blockquote>
+<p>foreach 使用的iterator方式遍历，元素remove会造成ConcurrentModificationException；</p>
+<h4 id="并发处理"><a href="#并发处理" class="headerlink" title="并发处理"></a>并发处理</h4><blockquote>
+<p>4.【强制】线程池不允许使用Executors去创建，而是通过ThreadPoolExecutor的方式，这 样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。 说明：Executors返回的线程池对象的弊端如下：<br>1） FixedThreadPool和SingleThreadPool：   允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。<br>2） CachedThreadPool：   允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。</p>
+</blockquote>
+<blockquote>
+<p>5.【强制】SimpleDateFormat 是线程不安全的类，一般不要定义为 static变量，如果定义为 static，必须加锁，或者使用 DateUtils工具类。<br><code>正例</code>：注意线程安全，使用 DateUtils。亦推荐如下处理：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;DateFormat&gt; df = <span class="keyword">new</span> ThreadLocal&lt;DateFormat&gt;() &#123;        </span><br><span class="line"><span class="meta">@Override</span>        </span><br><span class="line"><span class="function"><span class="keyword">protected</span> DateFormat <span class="title">initialValue</span><span class="params">()</span> </span>&#123;            </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);        </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><code>说明</code>：如果是JDK8 的应用，可以使用 Instant 代替 Date，LocalDateTime 代替 Calendar， DateTimeFormatter 代替SimpleDateFormat，<strong>官方给出的解释：simple beautiful strong immutable thread-safe。</strong> </p>
+<blockquote>
+<p>12.【强制】多线程并行处理定时任务时，Timer运行多个 TimeTask时，只要其中之一没有捕获 抛出的异常，其它任务便会自动终止运行，如果在处理定时任务时使用 ScheduledExecutorService 则没有这个问题。</p>
+<ol start="18">
+<li>【参考】HashMap 在容量不够进行resize时由于高并发可能出现死链，导致CPU飙升，在 开发过程中可以使用其它数据结构或加锁来规避此风险。 </li>
+</ol>
+</blockquote>
+<h4 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h4><blockquote>
+<p>2.【强制】当switch 括号内的变量类型为String并且此变量为外部参数时，必须先进行null 判断。</p>
+</blockquote>
+<p>可能有NPE异常；</p>
+<blockquote>
+<p>4.【强制】在高并发场景中，避免使用”等于”判断作为中断或退出的条件。<br><code>说明</code>：如果并发控制没有处理好，容易产生等值判断被“击穿”的情况，使用大于或小于的区间判断条件 来代替。 </p>
+</blockquote>
+<blockquote>
+<p>9.【推荐】避免采用取反逻辑运算符。<br><code>说明</code>：取反逻辑不利于快速理解，并且取反逻辑写法必然存在对应的正向逻辑写法。</p>
+</blockquote>
+<h4 id="注释规约"><a href="#注释规约" class="headerlink" title="注释规约"></a>注释规约</h4><blockquote>
+<ol>
+<li>【强制】类、类属性、类方法的注释必须使用Javadoc规范，使用/*<em>内容</em>/格式，不得使用 // xxx方式。<br><code>说明</code>：在IDE编辑窗口中，Javadoc 方式会提示相关注释，生成 Javadoc 可以正确输出相应注释；在 IDE 中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高阅读效率。 </li>
+</ol>
+</blockquote>
+<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><blockquote>
+<p>5.【强制】获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime(); <code>说明</code>：如果想获取更加精确的纳秒级时间值，使用System.nanoTime()的方式。在 JDK8 中，针对统计时 间等场景，推荐使用 Instant 类。 </p>
+</blockquote>
+<blockquote>
+<p>1.【强制】在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度。 说明：不要在方法体内定义：Pattern pattern = Pattern.compile(“规则”); </p>
+</blockquote>
+<blockquote>
+<p>6.【强制】日期格式化时，传入pattern 中表示年份统一使用小写的y。<br><code>说明</code>：日期格式化时，yyyy表示当天所在的年，而大写的 YYYY代表是 week in which year （JDK7 之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束， 只要本周跨年，返回的 YYYY就是下一年。另外需要注意：<br>表示月份是大写的 M<br>表示分钟则是小写的 m<br>24小时制的是大写的 H<br>12小时制的则是小写的 h 正例：表示日期和时间的格式如下所示：  new SimpleDateFormat(“yyyy-MM-dd HH:mm:ss”); </p>
+</blockquote>
+<p>比较容易忽略</p>
+<p>###第二节 异常日志</p>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><blockquote>
+<p>1.【强制】Java类库中定义的可以通过预检查方式规避RuntimeException异常不应该通过catch的方式来处理,比如:NullPointerException,IndexOutOfException等等<br><code>说明</code>:无法通过预检查的异常除外,比如,在解析字符串形式的数字时,可能存在数字格式错误,不得不<br>通过 catch NumberFormatException 来实现。<br>正例:if (obj != null) {…}<br>反例:try { obj.method(); } catch (NullPointerException e) {…}</p>
+</blockquote>
+<p>尽量规避可控异常</p>
+<blockquote>
+<p>5.【强制】有try块放到了事务代码中，catch异常后，如果需要回滚事务，一定要注意手动回 滚事务。</p>
+</blockquote>
+<p>Spring使用声明式事务处理，默认情况下，如果被注解的数据库操作方法中发生了unchecked异常，所有的数据库操作将rollback；如果发生的异常是checked异常，默认情况下数据库操作还是会提交的。</p>
+<blockquote>
+<p>6.【强制】finally块必须对资源对象、流对象进行关闭，有异常也要做try-catch。 说明：如果JDK7 及以上，可以使用 try-with-resources方式。</p>
+</blockquote>
+<p>很容易忘</p>
+<h4 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h4><blockquote>
+<p>1.【强制】应用中不可直接使用日志系统(Log4j、Logback)中的API,而应依赖使用日志框架 SLF4J 中的 API,使用门面模式的日志框架,有利于维护和各个类的日志处理方式统一。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(Test<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>4.【强制】在日志输出时，字符串变量之间的拼接使用占位符的方式。<br><code>说明</code>：因为 String 字符串的拼接会使用 StringBuilder的 append()方式，有一定的性能损耗。使用占位符 仅是替换动作，可以有效提升性能。 正例：logger.debug(“Processing trade with id: {} and symbol: {}”, id, symbol); </p>
+</blockquote>
+<blockquote>
+<p>5.【强制】对于trace/debug/info级别的日志输出，必须进行日志级别的开关判断。<br><code>说明</code>：虽然在 debug(参数)的方法体内第一行代码isDisabled(Level.DEBUG_INT)为真时（Slf4j的常见实现Log4j和Logback），就直接 return，但是参数可能会进行字符串拼接运算。此外，如果debug(getName())这种参数内有getName()方法调用，无谓浪费方法调用的开销。<br><code>正例</code>：// 如果判断为真，那么可以输出 trace和debug级别的日志</p>
+</blockquote>
+<blockquote>
+<p>4.【强制】用户请求传入的任何参数必须做有效性验证。<br><code>说明</code>：忽略参数校验可能导致：<br>        age size 过大导致内存溢出<br>        恶意order by导致数据库慢查询<br>        任意重定向<br>        SQL 注入<br>        反序列化注入<br>         正则输入源串拒绝服务 ReDoS<br><code>说明</code>：Java代码用正则来验证客户端的输入，有些正则写法验证普通用户输入没有问题，但是如果攻击人员使用的是特殊构造的字符串来验证，有可能导致死循环的结果</p>
+</blockquote>
+<h3 id="第四节-安全规约"><a href="#第四节-安全规约" class="headerlink" title="第四节 安全规约"></a>第四节 安全规约</h3><blockquote>
+<p>6.【强制】表单、AJAX提交必须执行 CSRF安全验证。 说明：CSRF(Cross-site request forgery)跨站请求伪造是一类常见编程漏洞。对于存在 CSRF漏洞的应用 /网站，攻击者可以事先构造好 URL，只要受害者用户一访问，后台便在用户不知情的情况下对数据库中 用户参数进行相应修改。</p>
+</blockquote>
+<h3 id="第五节-Mysql数据库"><a href="#第五节-Mysql数据库" class="headerlink" title="第五节 Mysql数据库"></a>第五节 Mysql数据库</h3><blockquote>
+<p>1.【强制】表达是与否概念的字段，必须使用is_xxx的方式命名，数据类型是unsigned tinyint（1表示是，0表示否）。<br>说明：任何字段如果为非负数，必须是 unsigned。 注意：POJO类中的任何布尔类型的变量，都不要加 is前缀，所以，需要在<resultmap>设置从 is_xxx 到 Xxx的映射关系。数据库表示是与否的值，使用 tinyint 类型，坚持 is_xxx的命名方式是为了明确其取 值含义与取值范围。<br>正例：表达逻辑删除的字段名 is_deleted，1 表示删除，0 表示未删除。</resultmap></p>
+</blockquote>
+<blockquote>
+<p>5.【强制】主键索引名为 pk_字段名；唯一索引名为 uk_字段名；普通索引名则为 idx_字段名。<br>说明：pk_ 即primary key；uk_ 即 unique key；idx_ 即index的简称。 </p>
+</blockquote>
+<blockquote>
+<p>8.【强制】varchar是可变长字符串，不预先分配存储空间，长度不要超过5000，如果存储长 度大于此值，定义字段类型为 text，独立出来一张表，用主键来对应，避免影响其它字段索 引效率。 </p>
+</blockquote>
+<p>1、因为mysql 是行存储模式，所以会把整行读取出来。text储存了大量的数据。读取时，占了大量的io。所以会十分的慢。<br>2、每行的数据过大 行溢出InnoDB 会将一些大对象数据存放在数据页之外的BLOB页中，然后在查询时根据指针去对应的 BLOB 页中查询,查询变慢</p>
+<h4 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h4><blockquote>
+<p>4.【强制】页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决。<br><code>说明</code>：索引文件具有 B-Tree 的最左前缀匹配特性，如果左边的值未确定，那么无法使用此索引。全模糊使用elasticsearch才能解决这个问题</p>
+</blockquote>
+<blockquote>
+<p>5.【推荐】如果有order by的场景，请注意利用索引的有序性。order by 最后的字段是组合 索引的一部分，并且放在索引组合顺序的最后，避免出现file_sort的情况，影响查询性能。 </p>
+</blockquote>
+<blockquote>
+<p>7.【推荐】利用延迟关联或者子查询优化超多分页场景。 <code>说明</code>：MySQL 并不是跳过 offset行，而是取offset+N 行，然后返回放弃前offset行，返回N行，那当offset特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL 改写。<br><code>正例</code>：先快速定位需要获取的 id 段，然后再关联：<br>SELECT a.* FROM 表1 a, (select id from 表1 where 条件 LIMIT 100000,20 ) b where a.id=b.id </p>
+</blockquote>
+<p>可以理解为 limit 10000,20也是返回了一章10020的表，这时候我们把他inner join，小表驱动大表，至少能够使用索引能够更快一些。</p>
+<h4 id="Sql语句"><a href="#Sql语句" class="headerlink" title="Sql语句"></a>Sql语句</h4><blockquote>
+<p>1.【强制】不要使用count(列名)或count(常量)来替代count(<em>)，count(</em>)是SQL92定义的 标准统计行数的语法，跟数据库无关，跟NULL和非NULL无关。 <code>说明</code>：count(*)会统计值为NULL 的行，而 count(列名)不会统计此列为 NULL 值的行。 </p>
+</blockquote>
+<p>使用count(*)吧</p>
+<blockquote>
+<p>2.【强制】count(distinct col) 计算该列除NULL之外的不重复行数，注意 count(distinct col1, col2) 如果其中一列全为NULL，那么即使另一列有不同的值，也返回为0。<br>3.【强制】当某一列的值全是NULL时，count(col)的返回结果为0，但sum(col)的返回结果为NULL，因此使用sum()时需注意NPE问题。 <code>正例</code>：使用如下方式来避免 sum的NPE问题：SELECT IFNULL(SUM(column), 0) FROM table;<br>9.【推荐】in操作能避免则避免，若实在避免不了，需要仔细评估 in后边的集合元素数量，控 制在1000个之内。 </p>
+</blockquote>
+<p>DELETE语句执行删除的过程是每次从表中删除一行，并且同时将该行的删除操作作为事务记录在日志中保存以便进行进行回滚操作。<br>TRUNCATE TABLE 则一次性地从表中删除所有的数据并不把单独的删除操作记录记入日志保存，删除行是不能恢复的。并且在删除的过程中不会激活与表有关的删除触发器。执行速度快。drop语句将表所占用的空间全释放掉。</p>
+<h4 id="ORM映射"><a href="#ORM映射" class="headerlink" title="ORM映射"></a>ORM映射</h4><blockquote>
+<p>6.【强制】不允许直接拿 HashMap与 Hashtable作为查询结果集的输出。 <code>说明</code>：resultClass=”Hashtable”，会置入字段名和属性值，但是值的类型不可控。 </p>
+</blockquote>
+<blockquote>
+<p>8.【推荐】不要写一个大而全的数据更新接口。传入为POJO类，不管是不是自己的目标更新 字段，都进行update table set c1=value1,c2=value2,c3=value3; 这是不对的。执行SQL 时，不要更新无改动的字段，一是易出错；二是效率低；三是增加binlog存储。 </p>
+</blockquote>
+<p>有时候会图方便</p>
+<h4 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h4><blockquote>
+<p>3.【强制】线上应用不要依赖 SNAPSHOT版本（安全包除外）。  说明：不依赖SNAPSHOT 版本是保证应用发布的幂等性。另外，也可以加快编译时的打包构建。</p>
+</blockquote>
+<blockquote>
+<p>5.【强制】二方库里可以定义枚举类型，参数可以使用枚举类型，但是接口返回值不允许使用 枚举类型或者包含枚举类型的 POJO对象。 </p>
+</blockquote>
+<p>作为输入，枚举简直就是安全保障。但作为返回值，不确定返回值，增加异常风险</p>
+<blockquote>
+<ol start="9">
+<li>【推荐】所有 pom文件中的依赖声明放在<dependencies>语句块中，所有版本仲裁放在 <dependencymanagement>语句块中。 <code>说明</code>：<dependencymanagement>里只是声明版本，并不实现引入，因此子项目需要显式的声明依 赖，version 和 scope 都读取自父 pom。而<dependencies>所有声明在主 pom的<dependencies>里 的依赖都会自动引入，并默认被所有的子项目继承。 </dependencies></dependencies></dependencymanagement></dependencymanagement></dependencies></li>
+</ol>
+</blockquote>
+<h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><blockquote>
+<p>1.【推荐】高并发服务器建议调小 TCP协议的 time_wait超时时间。<br><code>说明</code>：操作系统默认240秒后，才会关闭处于 time_wait 状态的连接，在高并发访问下，服务器端会因为 处于 time_wait 的连接数太多，可能无法建立新的连接，所以需要在服务器上调小此等待值。<br><code>正例</code>：在linux服务器上请通过变更/etc/sysctl.conf 文件去修改该缺省值（秒）：<br>net.ipv4.tcp_fin_timeout = 30 </p>
+</blockquote>
+<p>记录下参数</p>
+<blockquote>
+<p>3.【推荐】给JVM 环境参数设置-XX:+HeapDumpOnOutOfMemoryError 参数，让JVM 碰到 OOM 场景时输出dump 信息。<br><code>说明</code>：OOM 的发生是有概率的，甚至相隔数月才出现一例，出错时的堆内信息对解决问题非常有帮助。<br>4.【推荐】在线上生产环境，JVM的Xms和Xmx设置一样大小的内存容量，避免在 GC 后调整 堆大小带来的压力。 </p>
+</blockquote>
+<h4 id="设计规约"><a href="#设计规约" class="headerlink" title="设计规约"></a>设计规约</h4><blockquote>
+<p>8.【推荐】类在设计与实现时要符合单一原则。 <code>说明</code>：单一原则最易理解却是最难实现的一条规则，随着系统演进，很多时候，忘记了类设计的初衷。 </p>
+</blockquote>
+<blockquote>
+<p>9.【推荐】谨慎使用继承的方式来进行扩展，优先使用聚合/组合的方式来实现。<br><code>说明</code>：不得已使用继承的话，必须符合里氏代换原则，此原则说父类能够出现的地方子类一定能够出现， 比如，“把钱交出来”，钱的子类美元、欧元、人民币等都可以出现。</p>
+</blockquote>
+<p>里氏代换原则表明：一个软件如果使用的是一个基类的话，那么一定适 用于其子类，而且它根本不可能察觉出基类对象和子类对象的区别；必须指出，这个原则 反过来不一定成立，即一个软件实体使用的是一个子类的话，那么它不一定适用于基类。</p>
+<blockquote>
+<p>15.【参考】设计的本质就是识别和表达系统难点，找到系统的变化点，并隔离变化点。 <code>说明</code>：世间众多设计模式目的是相同的，即隔离系统变化点。 </p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java基础/" rel="tag"># java基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/22/IDEA如何自动生成serialVersionUID/" rel="next" title="IDEA如何自动生成serialVersionUID">
+                <i class="fa fa-chevron-left"></i> IDEA如何自动生成serialVersionUID
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">marvin</p>
+              <p class="site-description motion-element" itemprop="description">奋斗的攻城狮</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/marvinwjs" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#常量定义"><span class="nav-number">1.</span> <span class="nav-text">常量定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OOP规约"><span class="nav-number">2.</span> <span class="nav-text">OOP规约</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合处理"><span class="nav-number">3.</span> <span class="nav-text">集合处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并发处理"><span class="nav-number">4.</span> <span class="nav-text">并发处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制语句"><span class="nav-number">5.</span> <span class="nav-text">控制语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注释规约"><span class="nav-number">6.</span> <span class="nav-text">注释规约</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它"><span class="nav-number">7.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常处理"><span class="nav-number">8.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志规约"><span class="nav-number">9.</span> <span class="nav-text">日志规约</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#第四节-安全规约"><span class="nav-number"></span> <span class="nav-text">第四节 安全规约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五节-Mysql数据库"><span class="nav-number"></span> <span class="nav-text">第五节 Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引规约"><span class="nav-number">1.</span> <span class="nav-text">索引规约</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sql语句"><span class="nav-number">2.</span> <span class="nav-text">Sql语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORM映射"><span class="nav-number">3.</span> <span class="nav-text">ORM映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工程结构"><span class="nav-number">4.</span> <span class="nav-text">工程结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器"><span class="nav-number">5.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计规约"><span class="nav-number">6.</span> <span class="nav-text">设计规约</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">marvin</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
