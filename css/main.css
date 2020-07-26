@@ -445,7 +445,7 @@ body {
 .header-inner {
   margin: 0 auto;
   padding: 100px 0 70px;
-  width: 700px;
+  /* width: 700px; */
 }
 @media (min-width: 1600px) {
   .container .header-inner {
@@ -1203,7 +1203,7 @@ pre .javascript .function {
 }
 .menu {
   margin-top: 20px;
-  padding-left: 0;
+  padding-left: 322px;
   text-align: center;
 }
 .menu .menu-item {
@@ -2617,7 +2617,7 @@ pre .javascript .function {
   position: relative;
   margin: 0 auto;
   /*width: 960px;*/
-  width: 80%;
+  /* width: 80%; */
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2819,7 +2819,7 @@ pre .javascript .function {
 .menu .menu-item {
   display: block;
   margin: 0;
-  float: right;
+  float: left;
 }
 .menu .menu-item a {
   position: relative;
